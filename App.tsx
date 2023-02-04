@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Suspense } from 'react';
-import { I18nProvider, useI18nContext } from './I18n';
+import { RecoilRoot } from 'recoil';
+import { useI18nContext } from './I18n';
 import { ModalProvider, useModal } from './Modal';
 import './style.css';
 
@@ -47,10 +48,12 @@ const Page = () => {
 
 export default function App() {
   return (
-    <I18nProvider>
-      <ModalProvider>
-        <Page />
-      </ModalProvider>
-    </I18nProvider>
+    <RecoilRoot>
+      <Suspense fallback={null}>
+        <ModalProvider>
+          <Page />
+        </ModalProvider>
+      </Suspense>
+    </RecoilRoot>
   );
 }

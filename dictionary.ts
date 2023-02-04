@@ -31,3 +31,9 @@ const messages = {
 export function getMessage(message: string, lang: string): string {
   return messages[message]?.[lang] ?? message;
 }
+
+export const getMessage2 =
+  (lang: string) =>
+  (message: string): string => {
+    return messages[message]?.[lang] ?? message;
+  };

@@ -1,4 +1,4 @@
-// 引用元: https://zenn.dev/uhyo/articles/provider-tower-to-recoil
+// 参考: https://zenn.dev/uhyo/articles/provider-tower-to-recoil
 import * as React from 'react';
 import {
   useEffect,

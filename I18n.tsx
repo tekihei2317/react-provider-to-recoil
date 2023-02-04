@@ -1,5 +1,18 @@
-import * as React from 'react';
-import { getMessage } from './dictionary';
+import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
+import { getMessage2 } from './dictionary';
+
+const languageState = atom({
+  key: 'language',
+  default: 'ja',
+});
+
+const getMessageState = selector({
+  key: 'getMessage',
+  get: ({ get }) => {
+    const lang = get(languageState);
+    return getMessage2(lang);
+  },
+});
 
 type I18nContextValue = {
   lang: string;
@@ -7,31 +20,13 @@ type I18nContextValue = {
   i18n: (message: string) => string;
 };
 
-const I18nContext = React.createContext<I18nContextValue | undefined>(
-  undefined
-);
-
-export const I18nProvider = ({ children }: { children: React.ReactNode }) => {
-  const [lang, selectLang] = React.useReducer((prevLang, lang) => {
-    if (lang === 'ja' || lang === 'en') return lang;
-    return prevLang;
-  }, 'ja');
-
-  const i18n = (message: string) => {
-    return getMessage(message, lang);
-  };
-
-  return (
-    <I18nContext.Provider value={{ lang, selectLang, i18n }}>
-      {children}
-    </I18nContext.Provider>
-  );
-};
-
 export function useI18nContext(): I18nContextValue {
-  const value = React.useContext(I18nContext);
-  if (value === undefined) {
-    throw new Error('I18n context is not provided.');
-  }
-  return value;
+  const [lang, selectLang] = useRecoilState(languageState);
+  const i18n = useRecoilValue(getMessageState);
+
+  return {
+    lang,
+    selectLang,
+    i18n,
+  };
 }
