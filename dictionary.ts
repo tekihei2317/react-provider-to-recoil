@@ -11,7 +11,7 @@ const messages = {
   'カウンタを増やしますか？': {
     en: 'Are you sure you want to increment the counter?',
   },
-  'カウンタをリセットしますか?': {
+  'カウンタをリセットしますか？': {
     en: 'Are you sure you want to reset the counter?',
   },
   キャンセル: {

@@ -15,7 +15,7 @@ export const I18nProvider = ({ children }: { children: React.ReactNode }) => {
   const [lang, selectLang] = React.useReducer((prevLang, lang) => {
     if (lang === 'ja' || lang === 'en') return lang;
     return prevLang;
-  }, 'en');
+  }, 'ja');
 
   const i18n = (message: string) => {
     return getMessage(message, lang);
